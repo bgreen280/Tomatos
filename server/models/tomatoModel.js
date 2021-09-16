@@ -19,8 +19,8 @@ const eventSchema = new Schema({
     id: Number,
     time: [{ 
         type: String, 
-        start: Date, 
-        end: Date 
+        startTime: Date, 
+        endTime: Date 
     }], // { type: String, start: Date, end: Date }
     duration: Number,
     additionalTime: Number,
@@ -41,8 +41,7 @@ const Event = model('event', eventSchema);
 // creates a schema for 'label' and uses it to create the model for it below
 const labelSchema = new Schema({
     events: [{ 
-        totalEventNames: Number, 
-        useCount: Number, 
+        totalEventLabels: Number, 
         name: String, 
         id: { 
             type: Schema.Types.ObjectId, 
@@ -57,7 +56,6 @@ const Label = model('label', labelSchema);
 const nameSchema = new Schema({
     events: [{ 
         totalEventNames: Number, 
-        useCount: Number, 
         name: String, 
         id: { 
             type: Schema.Types.ObjectId, 
