@@ -1,30 +1,22 @@
 /**
- * ************************************
- *
- * @module  index.js
- * @author
- * @date
- * @description simply a place to combine reducers
- *
- * ************************************
- */
+* ************************************
+*
+* @module  index.js
+* @author
+* @date
+* @description simply a place to combine reducers
+*
+* ************************************
+*/
 
- import { combineReducers } from 'redux';
+import { combineReducers } from 'redux';
 
- // import all reducers here
- // example
-//  import marketsReducer from './marketsReducer';
- 
- 
- // combine reducers
- const reducers = combineReducers({
+// import reducers
+import timerReducer from './timerReducer'; 
 
-    // if we had other reducers, they would go here
-    // Example
-    // markets: marketsReducer,
- });
- 
- // make the combined reducers available for import
- export default reducers;
- 
- 
+// combine reducers
+const reducers = combineReducers({
+   timer: timerReducer,
+});
+
+export default reducers;
