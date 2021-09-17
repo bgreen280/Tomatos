@@ -1,3 +1,11 @@
+/*
+* DB hosted on MongoDB Free Tier
+* Exported as model Names below
+* Three Models Below: 
+*   Event { id, time, duration, additionalTime, totalTime, labals, name }  
+*   Label { name, id }
+*   Name { name, id }
+*/
 import { connect, Schema as _Schema, model } from 'mongoose';
 
 const MONGO_URI = 'mongodb+srv://bgreen:bgreen@cluster0.bzlm9.mongodb.net/tomatos?retryWrites=true&w=majority';
@@ -41,7 +49,6 @@ const Event = model('event', eventSchema);
 // creates a schema for 'label' and uses it to create the model for it below
 const labelSchema = new Schema({
     events: [{ 
-        totalEventLabels: Number, 
         name: String, 
         id: { 
             type: Schema.Types.ObjectId, 
@@ -55,7 +62,6 @@ const Label = model('label', labelSchema);
 // creates a schema for 'name' and uses it to create the model for it below
 const nameSchema = new Schema({
     events: [{ 
-        totalEventNames: Number, 
         name: String, 
         id: { 
             type: Schema.Types.ObjectId, 
