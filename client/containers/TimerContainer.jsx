@@ -13,30 +13,23 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/actions';
-import MarketCreator from '../components/MarketCreator';
-import MarketsDisplay from '../components/MarketsDisplay';
+// import TimerDisplay from '../components/TimerDisplay';
+// import EventNameDisplay from '../components/EventNameDisplay';
+// import LabelDisplay from '../components/LabelDisplay';
+// import ButtonDisplay from '../components/ButtonDisplay';
 
-const mapStateToProps = ({ markets }) => ({
-    newLocation: markets.newLocation,
-    totalCards: markets.totalCards,
-    marketList: markets.marketList,
+const mapStateToProps = ({ Timer }) => ({
+
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 const MarketsContainer = props => (
     <div className="innerbox">
-        <MarketCreator
-            newLocation={props.newLocation}
-            updateLocation={props.updateLocation}
-            addMarket={props.addMarket}
-        />
-        <MarketsDisplay
-            totalCards={props.totalCards}
-            marketList={props.marketList}
-            addCard={props.addCard}
-            deleteCard={props.deleteCard}
-        />
+        {/* <TimerDisplay />
+        <EventNameDisplay />
+        <LabelDisplay />
+        <ButtonDisplay /> */}
     </div>
 );
 

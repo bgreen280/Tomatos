@@ -11,26 +11,23 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import TimerContainer from './TimerContainer';
+// import TimerContainer from './TimerContainer.jsx';
 import * as actions from '../actions/actions';
 
 const mapStateToProps = ({
-    markets: { totalCards, totalMarkets, synced },
+    Timer: { },
     }) => ({
-        totalCards,
-        totalMarkets,
-        synced,
 });
 
 const mapDispatchToProps = dispatch => ({
-syncMarkets: () => dispatch(actions.syncMarkets()),
+    syncMarkets: () => dispatch(actions.syncMarkets()),
 });
 
 const MainContainer = props => (
     <div className="container">
         <div className="outerBox">
-            <h1 id="header">Timed Green Tomatos</h1>
-            <TimerContainer />
+            <h1 id="header">Timed Green Tomatoes</h1>
+            {/* <TimerContainer /> */}
         </div>
     </div>
 );

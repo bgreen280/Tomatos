@@ -1,8 +1,16 @@
 const path = require('path');
 
+// there are many ways to config a webpack
+// this is just one 
+// webpack config files will look different for different applications
+// command to install in dev dependencies: 
+// npm install -D sass-loader css-loader style-loader webpack 
+
 module.exports = {
-  mode: process.env.NODE_ENV,
-  entry: './client/index.js',
+  mode: process.env.NODE_ENV, // production or dev mode
+  entry: { 
+    src: './client/index.js'
+  },
   output: {
     path: path.resolve(__dirname, 'build'),
     publicPath: '/build', // used for development mode
@@ -10,27 +18,19 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.jsx?/,
-        exclude: /(node_modules)/,
+      { // javascript thangs
+        test: /\.jsx?/, // file extensions to be 
+        exclude: /(node_modules)/, // files to not be transformed
         use: {
           loader: "babel-loader",
-          options: {
+          options: { // reads as stack (from right to left)
             presets: ["@babel/preset-env", `@babel/preset-react`],
           },
         },
       },
-      {
-        //npm install -D sass-loader css-loader style-loader webpack
-        test: /\.s[ac]ss$/i,
-        use: [
-          // Creates `style` nodes from JS strings
-          { loader: "style-loader" },
-          // Translates CSS into CommonJS
-          { loader: "css-loader" },
-          // Compiles Sass to CSS
-          { loader: "sass-loader" },
-        ],
+      { // css thangs
+        test: /\.s[ac]ss$/i, // files to be transformed
+        use: [ 'style-loader', 'css-loader', 'sass-loader' ], //reads as stack (froms right to left)
       },
     ],
   },
@@ -41,7 +41,7 @@ module.exports = {
     proxy: {
       '/api': 'http://localhost:3000'
     },
-    compress: true,
+    // compress: true, 
     port: 8080,
   },
 };

@@ -9,9 +9,10 @@
 * 
 * TODO: add methods to handle single/multi/all query requests
 */
-import { Router } from 'express';
+const Router = require('express');
+const { ModuleFilenameHelpers } = require('webpack');
 
-import tomatosController from '../controllers/tomatoesController';
+const tomatoesController = require ('../controllers/tomatoesController');
 
 const router = Router();
 
@@ -19,11 +20,11 @@ const router = Router();
 * Create Routes 
 */
 router.post('/events',
-    tomatosController.createName(), // if name in names collection, continue
-    tomatosController.createLabel(), // if label in labels, continue
-    tomatosController.createEvent(),
-    tomatosController.updateName(),
-    tomatosController.updateLabel(),
+    tomatoesController.createName, // if name in names collection, continue
+    tomatoesController.createLabel, // if label in labels, continue
+    tomatoesController.createEvent,
+    tomatoesController.updateName,
+    tomatoesController.updateLabel,
     (_req, res) => res.status(200).json(res.locals.events)
 );
 
@@ -31,20 +32,20 @@ router.post('/events',
  * Getter Routes 
 */
 router.get('/events',
-    tomatosController.getEvent(),    
-    tomatosController.getEvents(),
+    tomatoesController.getEvent,    
+    tomatoesController.getEvents,
     (_req, res) => res.status(200).json(res.locals.events)
 );
 
 router.get('/labels',
-    tomatosController.getLabels(),
-    tomatosController.getLabel(),
+    tomatoesController.getLabels,
+    tomatoesController.getLabel,
     (_req, res) => res.status(200).json(res.locals.labels)
 );
 
 router.get('/names',
-    tomatosController.getNames(),
-    tomatosController.getName(),
+    tomatoesController.getNames,
+    tomatoesController.getName,
     (_req, res) => res.status(200).json(res.locals.names)
 );
 
@@ -52,17 +53,17 @@ router.get('/names',
  * Update Routes 
 */
 router.put('/events',
-    tomatosController.updateEvent(),
+    tomatoesController.updateEvent,
     (_req, res) => res.status(200).json(res.locals.events)
 );
 
 router.put('/labels',
-    tomatosController.updateLabel(),   
+    tomatoesController.updateLabel,   
     (_req, res) => res.status(200).json(res.locals.labels)
 );
 
 router.put('/names',
-    tomatosController.updateName(),
+    tomatoesController.updateName,
     (_req, res) => res.status(200).json(res.locals.names)
 );
 
@@ -70,36 +71,35 @@ router.put('/names',
  * Delete Routes 
 */
 router.delete('/events',
-    tomatosController.deleteEvent(),
+    tomatoesController.deleteEvent,
     (_req, res) => res.status(200).json(res.locals.events)
 );
 
 router.delete('/labels',
-    tomatosController.deleteLabel(),   
+    tomatoesController.deleteLabel,   
     (_req, res) => res.status(200).json(res.locals.labels)
 );
 
 router.delete('/names',
-    tomatosController.deleteName(),   
+    tomatoesController.deleteName,   
     (_req, res) => res.status(200).json(res.locals.names)
 );
 
-export default router;
-
-
 // router.get('/',
-//     // tomatosController
+//     // tomatoesController
 //     // starWarsController.getCharacters,
 //     // (req, res) => res.status(200).json(res.locals.characters)
 // );
 
 
 // router.post('/names',
-//     tomatosController.createName(),   
+//     tomatoesController.createName(),   
 //     (_req, res) => res.status(200).json(res.locals.names)
 // );
 
 // router.post('/labels',
-//     tomatosController.createEvent(), 
+//     tomatoesController.createEvent(), 
 //     (_req, res) => res.status(200).json(res.locals.labels)
 // );
+
+module.exports = router;

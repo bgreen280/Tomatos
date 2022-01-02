@@ -6,12 +6,13 @@
 *   
 * TODO: review update and create methods
 */
-import { Event, Label, Name } from '../models/tomatoModel';
 
-const tomatosController = {};
+const TomatoModel = require('../models/tomatoModel');
+
+const tomatoesController = {};
 
 // create event 
-tomatosController.createEvent = async (req, res, next) => {
+tomatoesController.createEvent = async (req, res, next) => {
     try {
         const {
             id,
@@ -22,7 +23,7 @@ tomatosController.createEvent = async (req, res, next) => {
             name
         } = req.body
 
-        const addedEventDoc = await Event.create({
+        const addedEventDoc = await TomatoModel.Event.create({
             id,
             time,
             duration,
@@ -41,14 +42,14 @@ tomatosController.createEvent = async (req, res, next) => {
 };
 
 // create label
-tomatosController.createLabel = async (req, res, next) => {
+tomatoesController.createLabel = async (req, res, next) => {
     try {
         const {
             name,
             id
         } = req.body
 
-        const addedLabelDoc = await Event.create({
+        const addedLabelDoc = await TomatoModel.Event.create({
             name,
             id          
         })
@@ -61,19 +62,20 @@ tomatosController.createLabel = async (req, res, next) => {
         });
     }
 };
+
 // create name
-tomatosController.createName = async (req, res, next) => {
+tomatoesController.createName = async (req, res, next) => {
     try {
         const {
             name,
             id
         } = req.body
 
-        const addednameDoc = await Event.create({
+        const addedNameDoc = await TomatoModel.Event.create({
             name,
             id          
         })
-        res.locals.events = addednameDoc;
+        res.locals.events = addedNameDoc;
         next();
     } catch (err) {
         return next({
@@ -87,10 +89,10 @@ tomatosController.createName = async (req, res, next) => {
 * Read Functions
 */
 // get events
-tomatosController.getEvents = async (_req, _res, next) => {
+tomatoesController.getEvents = async (_req, _res, next) => {
     try {
         if (req.body.id) { next() }
-        await Event.findAll( {} );
+        await TomatoModel.Event.findAll( {} );
         next();
     } catch (err) {
         return next({
@@ -99,11 +101,12 @@ tomatosController.getEvents = async (_req, _res, next) => {
         });
     } 
 }
+
 // get labels
-tomatosController.getLabels = async (_req, _res, next) => {
+tomatoesController.getLabels = async (_req, _res, next) => {
     try {
         if (req.body.id) { next() }
-        await Label.findAll( {} );
+        await TomatoModel.Label.findAll( {} );
         next();
     } catch (err) {
         return next({
@@ -112,11 +115,12 @@ tomatosController.getLabels = async (_req, _res, next) => {
         });
     } 
 }
+
 // get names
-tomatosController.getNames = async (_req, _res, next) => {
+tomatoesController.getNames = async (_req, _res, next) => {
     try {
         if (req.body.id) { next() }
-        await Name.findAll( {} );
+        await TomatoModel.Name.findAll( {} );
         next();
     } catch (err) {
         return next({
@@ -130,10 +134,10 @@ tomatosController.getNames = async (_req, _res, next) => {
 * Read Functions
 */
 // get event
-tomatosController.getEvent = async (_req, _res, next) => {
+tomatoesController.getEvent = async (_req, _res, next) => {
     const { _id } = _req.body;
     try {
-        await Event.findOne( { _id } );
+        await TomatoModel.Event.findOne( { _id } );
         next();
     } catch (err) {
         return next({
@@ -142,11 +146,12 @@ tomatosController.getEvent = async (_req, _res, next) => {
         });
     } 
 }
+
 // get label
-tomatosController.getLabel = async (_req, _res, next) => {
+tomatoesController.getLabel = async (_req, _res, next) => {
     const { _id } = _req.body;
     try {
-        await Event.findOne( { _id } );
+        await TomatoModel.Event.findOne( { _id } );
         next();
     } catch (err) {
         return next({
@@ -155,11 +160,12 @@ tomatosController.getLabel = async (_req, _res, next) => {
         });
     } 
 }
+
 // get name
-tomatosController.getName = async (_req, _res, next) => {
+tomatoesController.getName = async (_req, _res, next) => {
     const { _id } = _req.body;
     try {
-        await Event.findOne( { _id } );
+        await TomatoModel.Event.findOne( { _id } );
         next();
     } catch (err) {
         return next({
@@ -173,12 +179,12 @@ tomatosController.getName = async (_req, _res, next) => {
 * Update Functions
 */
 // update event
-tomatosController.updateEvent = async (req, _res, next) => {
+tomatoesController.updateEvent = async (req, _res, next) => {
     try {
         const { _id } = req.query;
         const { endTime, additionalTime } = req.body;
-        const state = await Event.findOne( { _id } )
-        await Event.updateOne({ 
+        const state = await TomatoModel.Event.findOne( { _id } )
+        await TomatoModel.Event.updateOne({ 
             _id: _id,
             time: state.time[this.time.length - 1].end = endTime,
             additionalTime: additionalTime,
@@ -194,14 +200,14 @@ tomatosController.updateEvent = async (req, _res, next) => {
 };
 
 // update label
-tomatosController.updateLabel = async (req, _res, next) => {
+tomatoesController.updateLabel = async (req, _res, next) => {
     try {
-        const _id = req.query.id;
-        await Label.updateOne({ 
-            _id = _id,
-            id = this.id.push(await Event.findOne({ _id })),
+        const { _id } = req.query;
+        // await TomatoModel.Label.updateOne({ 
+        //     _id: _id,
+        //     id: this.id.push(await Event.findOne({ _id })),
 
-        });
+        // });
         next();
     } catch (err) {
         return next({
@@ -212,13 +218,13 @@ tomatosController.updateLabel = async (req, _res, next) => {
 };
 
 // update name
-tomatosController.updateName = async (req, _res, next) => {
+tomatoesController.updateName = async (req, _res, next) => {
     try {
         const _id = req.query.id;
-        await Name.updateOne({
-            _id: id, 
-            id = this.id.push(await Event.findOne( { _id } ))
-        });
+        // await TomatoModel.Name.updateOne({
+        //     _id: id, 
+        //     id = this.id.push(await Event.findOne( { _id } ))
+        // });
         next();
     } catch (err) {
         return next({
@@ -232,10 +238,10 @@ tomatosController.updateName = async (req, _res, next) => {
 * Delete Functions
 */
 // delete event
-tomatosController.deleteEvent = async (req, _res, next) => {
+tomatoesController.deleteEvent = async (req, _res, next) => {
     try {
         const _id = req.query.id;
-        await Event.deleteOne({ _id });
+        await TomatoModel.Event.deleteOne({ _id });
         next();
     } catch (err) {
         return next({
@@ -245,11 +251,11 @@ tomatosController.deleteEvent = async (req, _res, next) => {
     } 
 }
 
-// delete labbel
-tomatosController.deleteLabel = async (req, _res, next) => {
+// delete label
+tomatoesController.deleteLabel = async (req, _res, next) => {
     try {
         const _id = req.query.id;
-        await Label.deleteOne({ _id });
+        await TomatoModel.Label.deleteOne({ _id });
         next();
     } catch (err) {
         return next({
@@ -260,10 +266,10 @@ tomatosController.deleteLabel = async (req, _res, next) => {
 }
 
 // delete name
-tomatosController.deleteName = async (req, _res, next) => {
+tomatoesController.deleteName = async (req, _res, next) => {
     try {
         const _id = req.query.id;
-        await Name.deleteOne({ _id });
+        await TomatoModel.Name.deleteOne({ _id });
         next();
     } catch (err) {
         return next({
@@ -275,4 +281,4 @@ tomatosController.deleteName = async (req, _res, next) => {
 
 
 
-export default tomatosController;
+module.exports = tomatoesController;

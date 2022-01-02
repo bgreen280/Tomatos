@@ -16,8 +16,8 @@ import reducers from './reducers/index';
 import { loadMarkets } from './actions/actions';
 
 const store = createStore(
-reducers,
-composeWithDevTools(applyMiddleware(thunk)),
+    reducers,
+    composeWithDevTools(applyMiddleware(thunk)),
 );
 
 store.dispatch(loadMarkets());
